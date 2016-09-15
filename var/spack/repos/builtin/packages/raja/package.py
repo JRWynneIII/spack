@@ -30,6 +30,7 @@ class Raja(Package):
     homepage = "http://software.llnl.gov/RAJA/"
 
     version('git', git='https://github.com/LLNL/RAJA.git', branch="master")
+    depends_on('cmake', type='build', when='@git')
 
     def install(self, spec, prefix):
         with working_dir('build', create=True):
