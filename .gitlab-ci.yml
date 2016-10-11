@@ -1,0 +1,47 @@
+stages:
+  - test
+
+titan:
+  variables:
+    HOME: /ccs/home/uamntr/gitlab-runner-sandboxes/titan-verify-upstream
+    arch: cray-SuSE11-istanbul
+  script:
+    - ./test.sh
+  tags:
+    - titan
+
+eos:
+  variables:
+    HOME: /ccs/home/uamntr/gitlab-runner-sandboxes/eos-verify-upstream
+    arch: cray-SuSE11-ivybridge
+  script:
+    - ./test.sh
+  tags:
+    - eos
+
+c4:
+  variables:
+    HOME: /ncrc/home1/Robert.French/gitlab-runner-sandboxes/c4-verify-upstream
+    arch: cray-SuSE12-ivybridge
+  script:
+    - ./test.sh
+  tags:
+    - c4
+
+rhea:
+  variables:
+    HOME: /ccs/home/uamntr/gitlab-runner-sandboxes/rhea-verify-upstream
+    arch: linux-redhat6-x86_64
+  script:
+    - ./test.sh
+  tags:
+    - rhea
+
+crest:
+  variables:
+    HOME: /ccs/home/uamntr/gitlab-runner-sandboxes/crest-verify-upstream
+    arch: linux-redhat7-ppc64le
+  script:
+    - ./test.sh
+  tags:
+    - crest 
