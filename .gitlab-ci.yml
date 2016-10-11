@@ -1,0 +1,32 @@
+stages:
+  - test
+
+cray:xk7:
+  script:
+    - ./test.sh
+  tags:
+    - titan
+
+cray:xc30:
+  script:
+    - ./test.sh
+  tags:
+    - eos
+
+cray:xc40:
+  script:
+    - ./test.sh
+  tags:
+    - c4
+
+linux:x86:
+  script:
+    - ./test.sh
+  tags:
+    - rhea
+
+linux:power8:
+  script:
+    - ./test.sh
+  tags:
+    - crest 
