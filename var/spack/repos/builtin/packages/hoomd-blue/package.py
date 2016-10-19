@@ -37,9 +37,11 @@ class HoomdBlue(Package):
     and perform in situ analysis."""
 
     homepage = "https://codeblue.umich.edu/hoomd-blue/index.html"
-    url      = "https://bitbucket.org/glotzer/hoomd-blue/get/v1.3.3.tar.bz2"
+    url      = "https://bitbucket.org/glotzer/hoomd-blue"
+    parallel = False
 
     version('1.3.3', '1469ef4531dc14b579c0acddbfe6a273')
+    version('2.1.0', git='https://bitbucket.org/glotzer/hoomd-blue', commit='c398b2601160')
 
     variant('mpi',  default=True, description='Compile with MPI enabled')
     variant('cuda', default=True, description='Compile with CUDA Toolkit')
@@ -57,7 +59,7 @@ class HoomdBlue(Package):
 
         cmake_args = [
             '-DPYTHON_EXECUTABLE=%s/python' % spec['python'].prefix.bin,
-            '-DBOOST_ROOT=%s'               % spec['boost'].prefix
+            '-DBOOST_ROOT=%s'               % spec['boost'].prefix,
         ]
 
         # MPI support
@@ -90,9 +92,10 @@ class HoomdBlue(Package):
         else:
             cmake_args.append('-DENABLE_DOXYGEN=OFF')
 
-        cmake_args.extend(std_cmake_args)
-        cmake('.', *cmake_args)
 
-        make()
-        make("test")
-        make("install")
+        cmake_args.extend(std_cmake_args)
+        with working_dir('build', create=True):
+            cmake('..', *cmake_args)
+            make()
+            #make("test")
+            make("install")
